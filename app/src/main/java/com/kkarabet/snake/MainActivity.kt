@@ -2,6 +2,7 @@ package com.kkarabet.snake
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.navigation.Navigation
 import com.kkarabet.snake.ui.main.MainFragment
 
 class MainActivity : AppCompatActivity() {
@@ -10,11 +11,9 @@ class MainActivity : AppCompatActivity() {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
-        if (savedInstanceState == null) {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.container, MainFragment.newInstance())
-                .commitNow()
-        }
+
     }
+    override fun onSupportNavigateUp() =
+        Navigation.findNavController(this, R.id.navHost).navigateUp()
 
 }

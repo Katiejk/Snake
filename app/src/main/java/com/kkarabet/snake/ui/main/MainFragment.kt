@@ -9,19 +9,21 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
+import androidx.navigation.findNavController
 import com.kkarabet.snake.R
 import kotlinx.android.synthetic.main.main_fragment.view.*
 
 class MainFragment : Fragment() {
 
     private lateinit var welcome: ImageView
+    private lateinit var settingsButton: ImageButton
+    private lateinit var viewModel: MainViewModel
 
     companion object {
         fun newInstance() = MainFragment()
     }
-
-    private lateinit var viewModel: MainViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,13 +35,18 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         welcome = view.imageView
+        settingsButton = view.imageButton2
         imageAnimation(welcome)
+
+        settingsButton.setOnClickListener(){
+            view.findNavController().navigate(R.id.mainToSettings)
+        }
     }
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
 
-        // TODO: Use the ViewModel
+
     }
 
     fun imageAnimation(image:ImageView){
