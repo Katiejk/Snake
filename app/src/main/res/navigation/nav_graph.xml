@@ -28,7 +28,9 @@
         android:label="ConfigFragment" >
         <action
             android:id="@+id/action_configFragment_to_gameFragment"
-            app:destination="@id/gameFragment" />
+            app:destination="@id/gameFragment"
+            app:popUpTo="@+id/mainFragment"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/gameFragment"
@@ -36,7 +38,9 @@
         android:label="GameFragment" >
         <action
             android:id="@+id/action_gameFragment_to_resultsFragment"
-            app:destination="@id/resultsFragment" />
+            app:destination="@id/resultsFragment"
+            app:popUpTo="@+id/mainFragment"
+            app:popUpToInclusive="false" />
         <argument
             android:name="SpeedSelected"
             app:argType="string" />
@@ -57,6 +61,7 @@
         android:label="ResultsFragment" >
         <action
             android:id="@+id/action_resultsFragment_to_mainFragment"
+            app:popUpTo="@+id/mainFragment"
             app:destination="@id/mainFragment" />
     </fragment>
 </navigation>
