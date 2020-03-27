@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">Snake</string>
+    <string name="red">Red</string>
+    <string name="orange">Orange</string>
+    <string name="yellow">Yellow</string>
+    <string name="ltGreen">Light Green</string>
+    <string name="dkGreen">Dark Green</string>
+    <string name="ltBlue">Light Blue</string>
+    <string name="dkBlue">Dark Blue</string>
+    <string name="purple">Purple</string>
+    <string name="black">Black</string>
+    <string name="whatColor">Snake color?</string>
+    <string name="whatFood">Snake food?</string>
+    <string name="junk">Junk food</string>
+    <string name="health">Healthy food</string>
+    <string name="realistic">Realistic food</string>
 </resources>
