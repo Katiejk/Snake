@@ -19,6 +19,7 @@ class MainFragment : Fragment() {
 
     private lateinit var welcome: ImageView
     private lateinit var settingsButton: ImageButton
+    private lateinit var startButton: ImageButton
     private lateinit var viewModel: MainViewModel
 
     companion object {
@@ -36,10 +37,14 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         welcome = view.imageView
         settingsButton = view.imageButton2
+        startButton = view.imageButton
         imageAnimation(welcome)
 
         settingsButton.setOnClickListener(){
             view.findNavController().navigate(R.id.mainToSettings)
+        }
+        startButton.setOnClickListener(){
+            view.findNavController().navigate(R.id.action_mainFragment_to_configFragment)
         }
     }
     override fun onActivityCreated(savedInstanceState: Bundle?) {

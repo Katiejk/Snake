@@ -14,4 +14,7 @@
     <string name="junk">Junk food</string>
     <string name="health">Healthy food</string>
     <string name="realistic">Realistic food</string>
+    <string name="current">Current Selection:</string>
+    <string name="blank">" "</string>
+    <string name="selector">Select snake speed:</string>
 </resources>

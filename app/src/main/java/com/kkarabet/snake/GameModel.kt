@@ -2,7 +2,18 @@ package com.kkarabet.snake
 
 class GameModel {
 
-    private var speed = 0
+    var speeds = listOf(
+        "Painfully slow",
+        "Very slow",
+        "Slow",
+        "Normal",
+        "Fast",
+        "Very fast",
+        "Impossible")
+
+    fun getSpeed(i:Int):String{
+        return speeds[i]
+    }
 
     companion object{
         var food = 2

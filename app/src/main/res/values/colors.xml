@@ -4,4 +4,6 @@
     <color name="colorPrimaryDark">#00300d</color>
     <color name="colorAccent">#00300d</color>
     <color name="welcomeBackground">#87ffa7</color>
+    <color name="colorCard">#5f8207</color>
+    <color name="colorCardText">#233027</color>
 </resources>

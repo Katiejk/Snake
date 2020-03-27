@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/welcomeBackground"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RadioGroup
+        android:id="@+id/radioGroup2"
+        android:layout_width="394dp"
+        android:layout_height="534dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.467"
+        app:layout_constraintStart_toEndOf="@+id/radioGroup"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.492">
+
+        <RadioButton
+            android:id="@+id/red"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/red"
+            android:textSize="42sp" />
+
+        <RadioButton
+            android:id="@+id/orange"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/orange"
+            android:textSize="42sp" />
+
+        <RadioButton
+            android:id="@+id/yellow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/yellow"
+            android:textSize="42sp" />
+
+        <RadioButton
+            android:id="@+id/ltgreen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/ltGreen"
+            android:textSize="42sp" />
+
+        <RadioButton
+            android:id="@+id/dkgreen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/dkGreen"
+            android:textSize="42sp" />
+
+        <RadioButton
+            android:id="@+id/ltblue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/ltBlue"
+            android:textSize="42sp" />
+
+        <RadioButton
+            android:id="@+id/dkblue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/dkBlue"
+            android:textSize="42sp" />
+
+        <RadioButton
+            android:id="@+id/purple"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/purple"
+            android:textSize="42sp" />
+
+        <RadioButton
+            android:id="@+id/black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/black"
+            android:textSize="42sp" />
+    </RadioGroup>
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="396dp"
+        android:layout_height="515dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.167"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RadioButton
+            android:id="@+id/realistic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/realistic"
+            android:textSize="42sp" />
+
+        <RadioButton
+            android:id="@+id/junk"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/junk"
+            android:textSize="42sp" />
+
+        <RadioButton
+            android:id="@+id/health"
+            android:checked="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/health"
+            android:textSize="42sp" />
+    </RadioGroup>
+
+    <ImageButton
+        android:id="@+id/imageButton3"
+        android:layout_width="260dp"
+        android:layout_height="117dp"
+        android:background="@color/welcomeBackground"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.984"
+        app:srcCompat="@drawable/apply" />
+
+    <TextView
+        android:id="@+id/food"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/whatFood"
+        android:textSize="69sp"
+        app:layout_constraintBottom_toTopOf="@+id/radioGroup"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.182"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/color"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/whatColor"
+        android:textSize="69sp"
+        app:layout_constraintBottom_toTopOf="@+id/radioGroup2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.519"
+        app:layout_constraintStart_toEndOf="@+id/food"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+</androidx.constraintlayout.widget.ConstraintLayout>
