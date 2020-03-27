@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kkarabet.snake.R
@@ -44,11 +45,20 @@ class ConfigFragment : Fragment() {
         reduceReuseRecycle.adapter  = Adapter(viewModel.speeds)
         start = view.findViewById(R.id.imageButton4)
         imageAnimation(start)
+
+        start.setOnClickListener { button: View ->
+            var SelectedSpeed : String? = viewModel.speed.value.toString()
+            SelectedSpeed?.let {
+                val SpeedSelected = viewModel.speed.value.toString()
+                val actionThing = ConfigFragmentDirections.actionConfigFragmentToGameFragment(SpeedSelected)
+                Navigation.findNavController(button).navigate(actionThing)
+            }
+        }
     }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(ConfigViewModel::class.java)
-        // TODO: Use the ViewModel
     }
 
     private inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickListener {

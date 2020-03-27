@@ -37,6 +37,9 @@
         <action
             android:id="@+id/action_gameFragment_to_resultsFragment"
             app:destination="@id/resultsFragment" />
+        <argument
+            android:name="SpeedSelected"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
