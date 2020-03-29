@@ -80,7 +80,7 @@ class GameFragment : Fragment() {
         viewModel.getNextSnakeImage(6)
         viewModel.setTrue()
 
-        turn(3,0,snake,food)
+        turn(3,0,snake,food,up,down,left,right)
         zoomZoomUp(snake,food)
         moveFood(food)
         imageAnimation(food)
@@ -88,16 +88,17 @@ class GameFragment : Fragment() {
         score.setText(viewModel.score.value!!.toString())
 
         up.setOnClickListener(){
-            turn(viewModel.direction.value!!,0,snake,food)
+            turn(viewModel.direction.value!!,0,snake,food,up,down,left,right)
+
         }
         down.setOnClickListener(){
-            turn(viewModel.direction.value!!,2,snake,food)
+            turn(viewModel.direction.value!!,2,snake,food,up,down,left,right)
         }
         left.setOnClickListener(){
-            turn(viewModel.direction.value!!,3,snake,food)
+            turn(viewModel.direction.value!!,3,snake,food,up,down,left,right)
         }
         right.setOnClickListener(){
-            turn(viewModel.direction.value!!,1,snake,food)
+            turn(viewModel.direction.value!!,1,snake,food,up,down,left,right)
         }
 
         gameOver.setOnClickListener { button: View ->
@@ -139,6 +140,7 @@ class GameFragment : Fragment() {
         set.play(foodY).with(foodX)
         set.duration = 100L
         set.start()
+
     }
 
     fun zoomZoomUp(snake:ImageView,food:ImageView){
@@ -220,20 +222,22 @@ class GameFragment : Fragment() {
         snakeAnim.start()
     }
 
-    fun turn(currentDirection:Int,newDirection:Int,snake:ImageView,food: ImageView){
+    fun turn(currentDirection:Int,newDirection:Int,snake:ImageView,food: ImageView,up:ImageView,down:ImageView,left:ImageView,right:ImageView){
         if(currentDirection == 0 && newDirection == 1){
             val animator = ValueAnimator.ofFloat(25f, 115f)
-
             animator.addUpdateListener {
                 val value = it.animatedValue as Float
                 snake.rotation= value
             }
-
             animator.interpolator = DecelerateInterpolator()
             animator.duration = 100L
             animator.start()
             viewModel.setDirection(1)
             zoomZoomRight(snake,food)
+            inflate(right)
+            deflate(up)
+            deflate(down)
+            deflate(left)
         }else if(currentDirection == 0 && newDirection ==3){
             val animator = ValueAnimator.ofFloat(25f, -65f)
 
@@ -247,6 +251,10 @@ class GameFragment : Fragment() {
             animator.start()
             viewModel.setDirection(3)
             zoomZoomLeft(snake,food)
+            inflate(left)
+            deflate(up)
+            deflate(down)
+            deflate(right)
         }else if(currentDirection == 1 && newDirection ==0){
             val animator = ValueAnimator.ofFloat(115f, 25f)
 
@@ -260,6 +268,10 @@ class GameFragment : Fragment() {
             animator.start()
             viewModel.setDirection(0)
             zoomZoomUp(snake,food)
+            inflate(up)
+            deflate(right)
+            deflate(down)
+            deflate(left)
         }else if(currentDirection == 1 && newDirection ==2){
             val animator = ValueAnimator.ofFloat(115f, 205f)
 
@@ -273,6 +285,10 @@ class GameFragment : Fragment() {
             animator.start()
             viewModel.setDirection(2)
             zoomZoomDown(snake,food)
+            inflate(down)
+            deflate(up)
+            deflate(right)
+            deflate(left)
 
         }else if(currentDirection == 2 && newDirection ==1){
             val animator = ValueAnimator.ofFloat(205f, 115f)
@@ -287,6 +303,10 @@ class GameFragment : Fragment() {
             animator.start()
             viewModel.setDirection(1)
             zoomZoomRight(snake,food)
+            inflate(right)
+            deflate(up)
+            deflate(down)
+            deflate(left)
 
         }else if(currentDirection == 2 && newDirection ==3){
             val animator = ValueAnimator.ofFloat(205f, 295f)
@@ -301,6 +321,10 @@ class GameFragment : Fragment() {
             animator.start()
             viewModel.setDirection(3)
             zoomZoomLeft(snake,food)
+            inflate(left)
+            deflate(up)
+            deflate(down)
+            deflate(right)
 
         }else if(currentDirection == 3 && newDirection ==2){
             val animator = ValueAnimator.ofFloat(295f, 205f)
@@ -315,6 +339,10 @@ class GameFragment : Fragment() {
             animator.start()
             viewModel.setDirection(2)
             zoomZoomDown(snake,food)
+            inflate(down)
+            deflate(up)
+            deflate(right)
+            deflate(left)
 
         }else if(currentDirection == 3 && newDirection ==0){
             val animator = ValueAnimator.ofFloat(295f, 385f)
@@ -329,6 +357,10 @@ class GameFragment : Fragment() {
             animator.start()
             viewModel.setDirection(0)
             zoomZoomUp(snake,food)
+            inflate(up)
+            deflate(right)
+            deflate(down)
+            deflate(left)
 
         }
     }
@@ -339,8 +371,9 @@ class GameFragment : Fragment() {
         if(viewModel.snakeY.value!!-viewModel.foodY.value!! > -85 && viewModel.snakeY.value!!-viewModel.foodY.value!! < 85
             && viewModel.snakeX.value!!-viewModel.foodX.value!! > -85 && viewModel.snakeX.value!!-viewModel.foodX.value!! < 85){
             viewModel.updateScore()
-            moveFood(food)
             score.setText(viewModel.score.value!!.toString())
+            moveFood(food)
+
         }
 
         if(viewModel.snakeY.value!! > 675 || viewModel.snakeY.value!! < -675
@@ -555,5 +588,31 @@ class GameFragment : Fragment() {
         set.play(smallx).with(small)
         set.duration = 350L
         set.start()
+    }
+
+    fun inflate(arrow: ImageView){
+        val animator = ValueAnimator.ofFloat(0.6f, 1f)
+
+        animator.addUpdateListener {
+            val value = it.animatedValue as Float
+            arrow.alpha= value
+        }
+
+        animator.interpolator = DecelerateInterpolator()
+        animator.duration = 100L
+        animator.start()
+    }
+
+    fun deflate(arrow: ImageView){
+        val animator = ValueAnimator.ofFloat(1f,0.6f)
+
+        animator.addUpdateListener {
+            val value = it.animatedValue as Float
+            arrow.alpha= value
+        }
+
+        animator.interpolator = DecelerateInterpolator()
+        animator.duration = 100L
+        animator.start()
     }
 }

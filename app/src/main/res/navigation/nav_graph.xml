@@ -29,6 +29,8 @@
         <action
             android:id="@+id/action_configFragment_to_gameFragment"
             app:destination="@id/gameFragment"
+            app:enterAnim="@anim/in_fast"
+            app:exitAnim="@anim/out_fast"
             app:popUpTo="@+id/mainFragment"
             app:popUpToInclusive="false" />
     </fragment>
@@ -63,8 +65,10 @@
         android:label="ResultsFragment" >
         <action
             android:id="@+id/action_resultsFragment_to_mainFragment"
-            app:popUpTo="@+id/mainFragment"
-            app:destination="@id/mainFragment" />
+            app:destination="@id/mainFragment"
+            app:enterAnim="@anim/in_right"
+            app:exitAnim="@anim/out_left"
+            app:popUpTo="@+id/mainFragment" />
         <argument
             android:name="finalScore"
             app:argType="integer" />
