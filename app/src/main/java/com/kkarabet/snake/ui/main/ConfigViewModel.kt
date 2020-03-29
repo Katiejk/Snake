@@ -16,4 +16,6 @@ class ConfigViewModel :  ViewModel(){
         thisSpeed = model.getSpeed(i)
         speedMutable.value = thisSpeed
     }
+
+
 }

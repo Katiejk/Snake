@@ -10,7 +10,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -45,6 +44,7 @@ class ConfigFragment : Fragment() {
         reduceReuseRecycle.adapter  = Adapter(viewModel.speeds)
         start = view.findViewById(R.id.imageButton4)
         imageAnimation(start)
+        viewModel.getSpeed(3)
 
         start.setOnClickListener { button: View ->
             var SelectedSpeed : String? = viewModel.speed.value.toString()

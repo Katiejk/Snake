@@ -7,6 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.kkarabet.snake.R
+import android.animation.Animator
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
+import android.widget.ImageButton
+import android.widget.TextView
+import androidx.navigation.Navigation
+import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.android.synthetic.main.cards.view.*
 
 class ResultsFragment : Fragment() {
 
@@ -26,6 +34,5 @@ class ResultsFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(ResultsViewModel::class.java)
-        // TODO: Use the ViewModel
     }
 }

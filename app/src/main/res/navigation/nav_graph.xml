@@ -63,5 +63,8 @@
             android:id="@+id/action_resultsFragment_to_mainFragment"
             app:popUpTo="@+id/mainFragment"
             app:destination="@id/mainFragment" />
+        <argument
+            android:name="finalScore"
+            app:argType="integer" />
     </fragment>
 </navigation>

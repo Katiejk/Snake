@@ -17,4 +17,7 @@
     <string name="current">Current Selection:</string>
     <string name="blank">" "</string>
     <string name="selector">Select snake speed:</string>
+    <string name="zero">0</string>
+    <string name="normal">Normal</string>
+    <string name="debug">DEBUG: Game Over</string>
 </resources>

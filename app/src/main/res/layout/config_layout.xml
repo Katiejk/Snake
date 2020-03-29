@@ -47,7 +47,7 @@
         android:id="@+id/textView3"
         android:layout_width="763dp"
         android:layout_height="126dp"
-        android:text="@string/blank"
+        android:text="@string/normal"
         android:textAlignment="center"
         android:textSize="69sp"
         app:layout_constraintBottom_toBottomOf="parent"
