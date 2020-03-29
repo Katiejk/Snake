@@ -92,6 +92,18 @@ class GameViewModel :  ViewModel(){
         val zero:Int = 0
         scoreMutable.value = zero
     }
+    private val gameOverMutable = MutableLiveData<Int>()
+    var gameOver: LiveData<Int> = gameOverMutable
+
+    fun setTrue() {
+        val value = 0
+        gameOverMutable.value = value
+    }
+    fun setFalse(){
+        val value = 1
+        gameOverMutable.value = value
+    }
+
 
 }
 

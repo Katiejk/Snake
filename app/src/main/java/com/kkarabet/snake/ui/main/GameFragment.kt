@@ -78,6 +78,7 @@ class GameFragment : Fragment() {
         viewModel.setSnakeX(0)
         viewModel.setSnakeY(0)
         viewModel.getNextSnakeImage(6)
+        viewModel.setTrue()
 
         turn(3,0,snake,food)
         zoomZoomUp(snake,food)
@@ -100,8 +101,15 @@ class GameFragment : Fragment() {
         }
 
         gameOver.setOnClickListener { button: View ->
-                val scoreFinal = viewModel.score.value!!
-                val actionThing = GameFragmentDirections.actionGameFragmentToResultsFragment(scoreFinal)
+            if(viewModel.gameOver.value!! ==0 ){
+                var scoreFinal : Int? = viewModel.score.value!!
+                scoreFinal?.let {
+                    val finalScore = viewModel.score.value!!
+                    val actionThing = GameFragmentDirections.actionGameFragmentToResultsFragment(finalScore)
+                    Navigation.findNavController(button).navigate(actionThing)
+                }
+            }
+            viewModel.setFalse()
 
         }
 
