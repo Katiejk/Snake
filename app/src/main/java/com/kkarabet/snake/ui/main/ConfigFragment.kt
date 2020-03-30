@@ -38,15 +38,19 @@ class ConfigFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel =  ViewModelProviders.of(this).get(ConfigViewModel::class.java)
+
         textView = view.findViewById(R.id.textView3)
         reduceReuseRecycle = view.findViewById(R.id.recyclerView)
         reduceReuseRecycle.layoutManager = LinearLayoutManager(context)
         reduceReuseRecycle.adapter  = Adapter(viewModel.speeds)
         start = view.findViewById(R.id.imageButton4)
+
         imageAnimation(start)
-        viewModel.getSpeed(3)
+        viewModel.getSpeed(3)//Set default
 
         start.setOnClickListener { button: View ->
+            viewModel.playStartSound()
+            //Safe Args
             var SelectedSpeed : String? = viewModel.speed.value.toString()
             SelectedSpeed?.let {
                 val SpeedSelected = viewModel.speed.value.toString()
@@ -93,13 +97,13 @@ class ConfigFragment : Fragment() {
             holder.bind(viewModel.speeds[position])
         }
     }
+
     fun imageAnimation(image:ImageButton){
         val big =
             ObjectAnimator.ofFloat(image, "scaleY", 0.75f, 1f)
 
         val small =
             ObjectAnimator.ofFloat(image, "scaleY", 1f, 0.75f)
-
 
         val bigx =
             ObjectAnimator.ofFloat(image, "scaleX", 0.75f, 1f)
@@ -116,7 +120,6 @@ class ConfigFragment : Fragment() {
                 imageAnimation(image)
             }
         })
-
 
         val set = AnimatorSet()
         set.play(big).before(small)

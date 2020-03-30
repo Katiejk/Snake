@@ -22,10 +22,6 @@ class MainFragment : Fragment() {
     private lateinit var startButton: ImageButton
     private lateinit var viewModel: MainViewModel
 
-    companion object {
-        fun newInstance() = MainFragment()
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -41,9 +37,11 @@ class MainFragment : Fragment() {
         imageAnimation(welcome)
 
         settingsButton.setOnClickListener(){
+            viewModel.playSettingsSound()
             view.findNavController().navigate(R.id.mainToSettings)
         }
         startButton.setOnClickListener(){
+            viewModel.playStartSound()
             view.findNavController().navigate(R.id.action_mainFragment_to_configFragment)
         }
     }

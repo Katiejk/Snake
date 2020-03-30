@@ -1,10 +1,10 @@
 package com.kkarabet.snake.ui.main
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import com.kkarabet.snake.GameModel
 
-class SettingsViewModel :  ViewModel(){
+class SettingsViewModel (application: Application) : AndroidViewModel(application){
+    private val model = GameModel(getApplication<Application>().assets)
     var color = GameModel.color
     var food = GameModel.food
 
@@ -13,5 +13,9 @@ class SettingsViewModel :  ViewModel(){
     }
     fun updateFood(newFood:Int){
         GameModel.food = newFood
+    }
+
+    fun playSettingsSound() {
+        model.playClose()
     }
 }

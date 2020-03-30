@@ -1,13 +1,17 @@
 package com.kkarabet.snake.ui.main
 
-import android.animation.Animator
-import android.animation.AnimatorSet
-import android.animation.ObjectAnimator
-import android.widget.ImageView
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
+import com.kkarabet.snake.GameModel
 
-class MainViewModel : ViewModel() {
-    // TODO: Implement the ViewModel
+class MainViewModel (application: Application) : AndroidViewModel(application){
+    private val model = GameModel(getApplication<Application>().assets)
 
+    fun playStartSound() {
+        model.playBeep()
+    }
 
+    fun playSettingsSound() {
+        model.playOpen()
+    }
 }

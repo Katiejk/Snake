@@ -13,10 +13,6 @@ import com.kkarabet.snake.R
 
 class SettingsFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = SettingsFragment()
-    }
-
     private lateinit var viewModel: SettingsViewModel
     private lateinit var colorSelector: RadioGroup
     private lateinit var foodSelector:RadioGroup
@@ -54,6 +50,7 @@ class SettingsFragment : Fragment() {
         }
 
         applyButton.setOnClickListener {
+            viewModel.playSettingsSound()
             var newColor = 0
             var newFood = 0
             when (colorSelector.checkedRadioButtonId){
@@ -76,8 +73,6 @@ class SettingsFragment : Fragment() {
             viewModel.updateFood(newFood)
             view.findNavController().navigate(R.id.action_settingsFragment_to_mainFragment)
         }
-
-
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

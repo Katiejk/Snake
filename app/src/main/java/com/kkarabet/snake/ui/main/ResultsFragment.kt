@@ -13,16 +13,9 @@ import android.animation.ObjectAnimator
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.cards.view.*
 
 class ResultsFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = ResultsFragment()
-    }
 
     private lateinit var viewModel: ResultsViewModel
     private lateinit var textView: TextView
@@ -49,6 +42,7 @@ class ResultsFragment : Fragment() {
         }
         imageAnimation(gameOver)
         newGame.setOnClickListener(){
+            viewModel.playStartSound()
             view.findNavController().navigate(R.id.action_resultsFragment_to_mainFragment)
         }
 
@@ -73,7 +67,6 @@ class ResultsFragment : Fragment() {
                 imageAnimation(image)
             }
         })
-
 
         val set = AnimatorSet()
         set.play(left).before(right)

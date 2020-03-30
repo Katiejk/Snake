@@ -1,14 +1,26 @@
 package com.kkarabet.snake.ui.main
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.kkarabet.snake.GameModel
 
-class GameViewModel :  ViewModel(){
-    private val model = GameModel()
+class GameViewModel (application: Application) : AndroidViewModel(application){
+    private val model = GameModel(getApplication<Application>().assets)
     private val speedValMutable = MutableLiveData<Int>()
     var speedVal: LiveData<Int> = speedValMutable
+
+    fun playEatSound() {
+        model.playEat()
+    }
+
+    fun playEndSound() {
+        model.playGameOver()
+    }
+    fun playArrowSound() {
+        model.playClick()
+    }
 
     fun getSpeedValue(i:String) {
         val value: Int

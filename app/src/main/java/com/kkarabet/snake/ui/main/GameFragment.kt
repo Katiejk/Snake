@@ -15,17 +15,11 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.annotation.NonNull
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import androidx.navigation.findNavController
 import com.kkarabet.snake.R
 
 class GameFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = GameFragment()
-    }
 
     private lateinit var viewModel: GameViewModel
     private lateinit var snake:ImageView
@@ -58,38 +52,40 @@ class GameFragment : Fragment() {
         score = view.findViewById(R.id.textView5)
         gameOver = view.findViewById(R.id.button2)
 
+        //From config
         arguments?.let { args ->
             val safeArgs = GameFragmentArgs.fromBundle(args)
             val speed = safeArgs.speedSelected
             viewModel.getSpeedValue(speed)
         }
 
+        //from settings
         viewModel.getFood()
-        when(viewModel.food.value){
-            0->
+        when(viewModel.food.value) {
+            0 ->
                 food.setImageResource(R.drawable.mouse)
             1 ->
                 food.setImageResource(R.drawable.junk)
             2 ->
                 food.setImageResource(R.drawable.apple)
-
         }
+
+        //Initializations
         viewModel.setDirection(0)
         viewModel.setSnakeX(0)
         viewModel.setSnakeY(0)
         viewModel.getNextSnakeImage(6)
         viewModel.setTrue()
+        viewModel.initializeScore()
 
         turn(3,0,snake,food,up,down,left,right)
-        zoomZoomUp(snake,food)
         moveFood(food)
         imageAnimation(food)
-        viewModel.initializeScore()
+
         score.setText(viewModel.score.value!!.toString())
 
         up.setOnClickListener(){
             turn(viewModel.direction.value!!,0,snake,food,up,down,left,right)
-
         }
         down.setOnClickListener(){
             turn(viewModel.direction.value!!,2,snake,food,up,down,left,right)
@@ -103,6 +99,7 @@ class GameFragment : Fragment() {
 
         gameOver.setOnClickListener { button: View ->
             if(viewModel.gameOver.value!! ==0 ){
+                viewModel.playEndSound()
                 var scoreFinal : Int? = viewModel.score.value!!
                 scoreFinal?.let {
                     val finalScore = viewModel.score.value!!
@@ -111,10 +108,9 @@ class GameFragment : Fragment() {
                 }
             }
             viewModel.setFalse()
-
         }
-
     }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(GameViewModel::class.java)
@@ -135,12 +131,10 @@ class GameFragment : Fragment() {
                 food.setVisibility(View.VISIBLE)
             }
         })
-
         val set = AnimatorSet()
         set.play(foodY).with(foodX)
         set.duration = 100L
         set.start()
-
     }
 
     fun zoomZoomUp(snake:ImageView,food:ImageView){
@@ -158,7 +152,6 @@ class GameFragment : Fragment() {
                 }
             }
         })
-
         snakeAnim.duration=150L
         snakeAnim.start()
     }
@@ -178,7 +171,6 @@ class GameFragment : Fragment() {
                 }
             }
         })
-
         snakeAnim.duration = 150L
         snakeAnim.start()
     }
@@ -199,10 +191,10 @@ class GameFragment : Fragment() {
                 }
             }
         })
-
         snakeAnim.duration = 150L
         snakeAnim.start()
     }
+
     fun zoomZoomLeft(snake:ImageView,food: ImageView){
         val snakeAnim =
             ObjectAnimator.ofFloat(snake, "translationX", viewModel.snakeX.value!!.toFloat(), viewModel.snakeX.value!!.toFloat()-viewModel.speedVal.value!!)
@@ -224,6 +216,7 @@ class GameFragment : Fragment() {
 
     fun turn(currentDirection:Int,newDirection:Int,snake:ImageView,food: ImageView,up:ImageView,down:ImageView,left:ImageView,right:ImageView){
         if(currentDirection == 0 && newDirection == 1){
+            viewModel.playArrowSound()
             val animator = ValueAnimator.ofFloat(25f, 115f)
             animator.addUpdateListener {
                 val value = it.animatedValue as Float
@@ -239,6 +232,7 @@ class GameFragment : Fragment() {
             deflate(down)
             deflate(left)
         }else if(currentDirection == 0 && newDirection ==3){
+            viewModel.playArrowSound()
             val animator = ValueAnimator.ofFloat(25f, -65f)
 
             animator.addUpdateListener {
@@ -256,6 +250,7 @@ class GameFragment : Fragment() {
             deflate(down)
             deflate(right)
         }else if(currentDirection == 1 && newDirection ==0){
+            viewModel.playArrowSound()
             val animator = ValueAnimator.ofFloat(115f, 25f)
 
             animator.addUpdateListener {
@@ -273,6 +268,7 @@ class GameFragment : Fragment() {
             deflate(down)
             deflate(left)
         }else if(currentDirection == 1 && newDirection ==2){
+            viewModel.playArrowSound()
             val animator = ValueAnimator.ofFloat(115f, 205f)
 
             animator.addUpdateListener {
@@ -291,6 +287,7 @@ class GameFragment : Fragment() {
             deflate(left)
 
         }else if(currentDirection == 2 && newDirection ==1){
+            viewModel.playArrowSound()
             val animator = ValueAnimator.ofFloat(205f, 115f)
 
             animator.addUpdateListener {
@@ -309,6 +306,7 @@ class GameFragment : Fragment() {
             deflate(left)
 
         }else if(currentDirection == 2 && newDirection ==3){
+            viewModel.playArrowSound()
             val animator = ValueAnimator.ofFloat(205f, 295f)
 
             animator.addUpdateListener {
@@ -327,6 +325,7 @@ class GameFragment : Fragment() {
             deflate(right)
 
         }else if(currentDirection == 3 && newDirection ==2){
+            viewModel.playArrowSound()
             val animator = ValueAnimator.ofFloat(295f, 205f)
 
             animator.addUpdateListener {
@@ -368,14 +367,13 @@ class GameFragment : Fragment() {
     fun slither(snake:ImageView,food: ImageView){
         viewModel.getNextSnakeImage(viewModel.snakeImage.value!!)
         viewModel.getColor()
-        if(viewModel.snakeY.value!!-viewModel.foodY.value!! > -85 && viewModel.snakeY.value!!-viewModel.foodY.value!! < 85
-            && viewModel.snakeX.value!!-viewModel.foodX.value!! > -85 && viewModel.snakeX.value!!-viewModel.foodX.value!! < 85){
+        if(viewModel.snakeY.value!!-viewModel.foodY.value!! > -90 && viewModel.snakeY.value!!-viewModel.foodY.value!! < 90
+            && viewModel.snakeX.value!!-viewModel.foodX.value!! > -90 && viewModel.snakeX.value!!-viewModel.foodX.value!! < 90){
             viewModel.updateScore()
             score.setText(viewModel.score.value!!.toString())
             moveFood(food)
-
+            viewModel.playEatSound()
         }
-
         if(viewModel.snakeY.value!! > 675 || viewModel.snakeY.value!! < -675
             || viewModel.snakeX.value!! > 830 || viewModel.snakeX.value!! < -830){
             gameOver.performClick()
